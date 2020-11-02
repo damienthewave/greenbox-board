@@ -19,5 +19,5 @@ The application is built using different modules:
  
  The modules are containerized using docker-compose file.
  
- ### 'docker-compose up' 
+ ### `docker-compose up`
  Starts the containers.
