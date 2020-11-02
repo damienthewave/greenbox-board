@@ -31,7 +31,7 @@ services:
       - backend
 
   react:
-    build: ./greenbox-ui
+    build: ./greenbox-react
     ports:
       - 80:80
     networks:
