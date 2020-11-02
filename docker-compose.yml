@@ -1,0 +1,45 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:8
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      MYSQL_DATABASE: greenbox
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: greenboxuser
+      MYSQL_PASSWORD: greenboxpass
+    volumes:
+      - db-data:/var/lib/greenbox/mysql
+    networks:
+      - backend
+      - frontend
+
+  spring:
+    build: ./greenbox-shop-rest
+    ports:
+      - 8080:8080
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/greenbox?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: greenboxuser
+      SPRING_DATASOURCE_PASSWORD: greenboxpass
+    depends_on:
+      - mysql
+    networks:
+      - backend
+
+  react:
+    build: ./greenbox-ui
+    ports:
+      - 80:80
+    networks:
+      - frontend
+
+volumes:
+  db-data:
+
+networks:
+  backend:
+  frontend:

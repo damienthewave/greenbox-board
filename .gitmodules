@@ -1,0 +1,3 @@
+[submodule "greenbox-shop-rest"]
+	path = greenbox-shop-rest
+	url = https://github.com/damienthewave/greenbox-shop-rest
